@@ -31,7 +31,7 @@ public class DownloadDataTask extends AsyncTask<String, Void, String> {
         double megabytes = kilobytes / 1024.0;
         double gigabytes = megabytes / 1024.0;
 
-        DecimalFormat format = new DecimalFormat("0.00");
+        DecimalFormat format = new DecimalFormat("0.0");
 
         if (gigabytes >= 1.0) {
             return format.format(gigabytes) + "GB";
@@ -99,21 +99,28 @@ public class DownloadDataTask extends AsyncTask<String, Void, String> {
             JSONObject netspd = json.getJSONObject("netspd");
             long inSpeed = netspd.getInt("in");
             int outSpeed = netspd.getInt("out");
-            remoteViews.setTextViewText(R.id.netspeed,"Speed ↓: " + formatBytes(inSpeed) + "/s" +", ↑: " + formatBytes(outSpeed) + "/s" );
+            remoteViews.setTextViewText(R.id.netspeed,"Net In: " + formatBytes(inSpeed) + "/s" +", Out: " + formatBytes(outSpeed) + "/s" );
             double time = json.getDouble("time");
             double ping =  (System.currentTimeMillis() - time*1000.00);
+            if(ping<0){ping = 1.0;}
             remoteViews.setTextViewText(R.id.ping,"Ping: " + (int)ping + "ms");
             double temp = json.getDouble("temp");
-            remoteViews.setTextViewText(R.id.temperature,"Temp: " + temp + "°C");
+            remoteViews.setTextViewText(R.id.temperature,"Temp: " + format.format(temp) + "°C");
             double  util = json.getDouble("util");
             remoteViews.setTextViewText(R.id.cpuUtilPercent,"CPU: " + format.format(util) + "%");
-            remoteViews.setProgressBar(R.id.cpuBar,0, (int)util, false);
             JSONObject memo = json.getJSONObject("memo");
             long totalMemo = memo.getLong("total");
             long availMemo = memo.getLong("avail");
             String ramPercent = format.format((availMemo / totalMemo) * 100);
-            remoteViews.setTextViewText(R.id.memUtilDatal,"RAM: " + formatBytes(availMemo*1000) + "/" + formatBytes(totalMemo*1000) + " (" + ramPercent + "%)");
-            long uptime = json.getLong("uptime");
+            remoteViews.setTextViewText(R.id.memUtilDatal,"RAM: " + formatBytes(availMemo*1000) + "/" + formatBytes(totalMemo*1000) + " used");
+            long uptimepick = json.getLong("uptime");
+            long uptime = System.currentTimeMillis()/1000 - uptimepick;
+            long days = uptime / 86400;
+            long hours = (uptime % 86400) / 3600;
+            long minutes = (uptime % 3600) / 60;
+            long seconds = uptime % 60;
+
+            remoteViews.setTextViewText(R.id.uptime,"Uptime: " + String.format("%dd %02dh %02dm %02ds", days, hours, minutes, seconds));
             remoteViews.setViewVisibility(R.id.heading, View.GONE);
             remoteViews.setViewVisibility(R.id.data, View.GONE);
             remoteViews.setViewVisibility(R.id.progressBar, View.GONE);
