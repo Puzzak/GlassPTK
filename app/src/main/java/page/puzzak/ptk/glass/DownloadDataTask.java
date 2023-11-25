@@ -18,13 +18,31 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 public class DownloadDataTask extends AsyncTask<String, Void, String> {
-    private static final int UPDATE_INTERVAL = 2000; // 1000 milliseconds = 1 second
+    private static final int UPDATE_INTERVAL = 1000; // 1000 milliseconds = 1 second
 
     private RemoteViews remoteViews;
     private Handler handler;
     private LiveCard mLiveCard;
+    public static String formatBytes(long bytes) {
+        double kilobytes = bytes / 1024.0;
+        double megabytes = kilobytes / 1024.0;
+        double gigabytes = megabytes / 1024.0;
+
+        DecimalFormat format = new DecimalFormat("0.00");
+
+        if (gigabytes >= 1.0) {
+            return format.format(gigabytes) + "GB";
+        } else if (megabytes >= 1.0) {
+            return format.format(megabytes) + "MB";
+        } else if (kilobytes >= 1.0) {
+            return format.format(kilobytes) + "KB";
+        } else {
+            return bytes + "B";
+        }
+    }
 
     DownloadDataTask(RemoteViews remoteViews, LiveCard liveCard) {
         this.remoteViews = remoteViews;
@@ -73,25 +91,31 @@ public class DownloadDataTask extends AsyncTask<String, Void, String> {
     }
 
     private void parseAndSetData(String jsonData) {
+        DecimalFormat format = new DecimalFormat("0.00");
         try {
             JSONObject json = new JSONObject(jsonData);
 
             // Parse data from JSON
             JSONObject netspd = json.getJSONObject("netspd");
-            int inSpeed = netspd.getInt("in");
+            long inSpeed = netspd.getInt("in");
             int outSpeed = netspd.getInt("out");
-
-            long time = json.getLong("time");
+            remoteViews.setTextViewText(R.id.netspeed,"Speed ↓: " + formatBytes(inSpeed) + "/s" +", ↑: " + formatBytes(outSpeed) + "/s" );
+            double time = json.getDouble("time");
+            double ping =  (System.currentTimeMillis() - time*1000.00);
+            remoteViews.setTextViewText(R.id.ping,"Ping: " + (int)ping + "ms");
             double temp = json.getDouble("temp");
-            double util = json.getDouble("util");
-
+            remoteViews.setTextViewText(R.id.temperature,"Temp: " + temp + "°C");
+            double  util = json.getDouble("util");
+            remoteViews.setTextViewText(R.id.cpuUtilPercent,"CPU: " + format.format(util) + "%");
+            remoteViews.setProgressBar(R.id.cpuBar,0, (int)util, false);
             JSONObject memo = json.getJSONObject("memo");
-            String totalMemo = memo.getString("total");
-            String availMemo = memo.getString("avail");
-
+            long totalMemo = memo.getLong("total");
+            long availMemo = memo.getLong("avail");
+            String ramPercent = format.format((availMemo / totalMemo) * 100);
+            remoteViews.setTextViewText(R.id.memUtilDatal,"RAM: " + formatBytes(availMemo*1000) + "/" + formatBytes(totalMemo*1000) + " (" + ramPercent + "%)");
             long uptime = json.getLong("uptime");
             remoteViews.setViewVisibility(R.id.heading, View.GONE);
-            remoteViews.setViewVisibility(R.id.data, View.VISIBLE);
+            remoteViews.setViewVisibility(R.id.data, View.GONE);
             remoteViews.setViewVisibility(R.id.progressBar, View.GONE);
             // Update UI with parsed data
             remoteViews.setTextViewText(R.id.data, "In Speed: " + inSpeed + "\n"

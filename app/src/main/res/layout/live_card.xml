@@ -4,18 +4,19 @@
     android:layout_height="match_parent"
     android:padding="@dimen/card_margin"
     tools:context=".LiveCardService">
+
     <TextView
         android:id="@+id/data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:text="1\n2\n3\n4\n5\n6\n7\n8"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:visibility="visible"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/heading"
@@ -29,8 +30,8 @@
         android:textAlignment="center"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:visibility="gone"/>
-        <!--android:visibility="visible"-->
+        android:visibility="gone" />
+    <!--android:visibility="visible"-->
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -40,8 +41,78 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="50dp"
-        android:visibility="gone"/>
-        <!--android:visibility="visible"-->
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/netspeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NetworkSpeed"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/ping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ping"
+        android:layout_below="@+id/netspeed"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temp"
+        android:layout_below="@+id/ping"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/cpuUtilPercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CPU%"
+        android:layout_alignBaseline="@+id/temperature"
+        android:layout_alignBottom="@+id/temperature"
+        android:layout_alignParentEnd="true" />
+
+    <ProgressBar
+        android:id="@+id/cpuBar"
+        style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/cpuUtilPercent"
+        android:background="?android:attr/colorBackground"
+        android:indeterminate="false"
+        tools:indeterminate="false" />
+
+    <ProgressBar
+        android:id="@+id/MemBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/memUtilDatal"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/memUtilDatal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MemUtil/MemTotal"
+        android:layout_below="@+id/cpuBar"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/uptime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Uptime"
+        android:layout_below="@+id/MemBar"
+        android:layout_alignParentStart="true" />
+    <!--android:visibility="visible"-->
 
 
 </RelativeLayout>
