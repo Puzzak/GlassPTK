@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_stop"
+        android:icon="@drawable/ic_stop"
+        android:title="@string/action_stop" />
+    <item
+        android:id="@+id/action_meme"
+        android:icon="@drawable/ic_glass_logo"
+        android:title="@string/meme" />
+</menu>
