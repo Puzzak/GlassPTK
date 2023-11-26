@@ -1,10 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/action_edit"
+        android:icon="@mipmap/icon_edit"
+        android:title="@string/editTitle"
+        android:titleCondensed="@string/title_activity_live_card_service"/>
+    <item
         android:id="@+id/action_stop"
         android:icon="@drawable/ic_stop"
         android:title="@string/action_stop" />
     <item
-        android:id="@+id/action_meme"
+        android:id="@+id/action_third"
         android:icon="@drawable/ic_glass_logo"
-        android:title="@string/meme" />
+        android:title="@string/action_stop" />
 </menu>

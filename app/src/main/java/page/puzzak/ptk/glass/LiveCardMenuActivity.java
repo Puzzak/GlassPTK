@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.google.android.glass.view.MenuUtils;
 
 /**
  * A transparent {@link Activity} displaying a "Stop" options menu to remove the {@link LiveCard}.
@@ -19,6 +20,9 @@ public class LiveCardMenuActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+//        setDescription(menu.findItem(R.id.action_edit),"Nr");
+//        menu.setInitialMenuItem();
+//        menu.findItem(R.id.action_edit).setTitle("Bruh");
         getMenuInflater().inflate(R.menu.live_card, menu);
         return true;
     }
@@ -30,7 +34,7 @@ public class LiveCardMenuActivity extends Activity {
                 // Stop the service which will unpublish the live card.
                 stopService(new Intent(this, LiveCardService.class));
                 return true;
-            case R.id.action_meme:
+            case R.id.action_edit:
                 // Stop the service which will unpublish the live card.
                 stopService(new Intent(this, LiveCardService.class));
                 return true;

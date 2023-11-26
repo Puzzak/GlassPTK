@@ -84,7 +84,7 @@ public class DownloadDataTask extends AsyncTask<String, Void, String> {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Execute the task again
+//                new DownloadDataTask(remoteViews, mLiveCard).execute("https://api.puzzak.page/AIO.php");
                 new DownloadDataTask(remoteViews, mLiveCard).execute("http://192.168.88.61/AIO.php");
             }
         }, UPDATE_INTERVAL);
@@ -94,24 +94,27 @@ public class DownloadDataTask extends AsyncTask<String, Void, String> {
         DecimalFormat format = new DecimalFormat("0.00");
         try {
             JSONObject json = new JSONObject(jsonData);
-
-            // Parse data from JSON
             JSONObject netspd = json.getJSONObject("netspd");
             long inSpeed = netspd.getInt("in");
             int outSpeed = netspd.getInt("out");
+            remoteViews.setViewVisibility(R.id.netspeed, View.VISIBLE);
             remoteViews.setTextViewText(R.id.netspeed,"Net In: " + formatBytes(inSpeed) + "/s" +", Out: " + formatBytes(outSpeed) + "/s" );
             double time = json.getDouble("time");
             double ping =  (System.currentTimeMillis() - time*1000.00);
             if(ping<0){ping = 1.0;}
+            remoteViews.setViewVisibility(R.id.ping, View.VISIBLE);
             remoteViews.setTextViewText(R.id.ping,"Ping: " + (int)ping + "ms");
             double temp = json.getDouble("temp");
+            remoteViews.setViewVisibility(R.id.temperature, View.VISIBLE);
             remoteViews.setTextViewText(R.id.temperature,"Temp: " + format.format(temp) + "°C");
             double  util = json.getDouble("util");
+            remoteViews.setViewVisibility(R.id.cpuUtilPercent, View.VISIBLE);
             remoteViews.setTextViewText(R.id.cpuUtilPercent,"CPU: " + format.format(util) + "%");
             JSONObject memo = json.getJSONObject("memo");
             long totalMemo = memo.getLong("total");
             long availMemo = memo.getLong("avail");
             String ramPercent = format.format((availMemo / totalMemo) * 100);
+            remoteViews.setViewVisibility(R.id.memUtilDatal, View.VISIBLE);
             remoteViews.setTextViewText(R.id.memUtilDatal,"RAM: " + formatBytes(availMemo*1000) + "/" + formatBytes(totalMemo*1000) + " used");
             long uptimepick = json.getLong("uptime");
             long uptime = System.currentTimeMillis()/1000 - uptimepick;
@@ -120,8 +123,9 @@ public class DownloadDataTask extends AsyncTask<String, Void, String> {
             long minutes = (uptime % 3600) / 60;
             long seconds = uptime % 60;
 
+            remoteViews.setViewVisibility(R.id.uptime, View.VISIBLE);
             remoteViews.setTextViewText(R.id.uptime,"Uptime: " + String.format("%dd %02dh %02dm %02ds", days, hours, minutes, seconds));
-            remoteViews.setViewVisibility(R.id.heading, View.GONE);
+//            remoteViews.setViewVisibility(R.id.heading, View.GONE);
             remoteViews.setViewVisibility(R.id.data, View.GONE);
             remoteViews.setViewVisibility(R.id.progressBar, View.GONE);
             // Update UI with parsed data

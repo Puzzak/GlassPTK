@@ -1,4 +1,4 @@
 <resources>
     <!-- Default screen margins, per the Glass design guidelines. -->
-    <dimen name="card_margin">30px</dimen>
+    <dimen name="card_margin">25px</dimen>
 </resources>

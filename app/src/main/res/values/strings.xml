@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Glass PTK</string>
     <string name="title_activity_live_card_service">PTK Card</string>
-    <string name="action_stop">Stop</string>
+    <string name="action_stop">Close PTK</string>
     <string name="hello_world">Hello world!</string>
     <string name="tagline">Yo, I\'m Puzzak!</string>
-    <string name="meme">Kiss Mother</string>
+    <string name="editTitle">Edit PTK URL</string>
     <string name="heading_large">Loading data...</string>
 </resources>

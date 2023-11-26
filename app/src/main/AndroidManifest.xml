@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="page.puzzak.ptk.glass">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.glass.permission.DEVELOPMENT" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +11,7 @@
         android:supportsRtl="true">
         <service
             android:name=".LiveCardService"
-            android:icon="@drawable/ic_glass_logo"
+            android:icon="@mipmap/ic_fg"
             android:label="@string/title_activity_live_card_service">
             <intent-filter>
                 <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
@@ -18,7 +19,7 @@
 
             <meta-data
                 android:name="com.google.android.glass.VoiceTrigger"
-                android:resource="@xml/voice_trigger" />
+                android:resource="@xml/launch_trigger" />
         </service>
 
         <activity
