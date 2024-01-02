@@ -7,6 +7,12 @@ repositories {
     }
 }
 
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
 android {
     compileSdkVersion "Google Inc.:Glass Development Kit Preview:19"
     buildToolsVersion "34.0.0"
@@ -27,4 +33,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+//    compile  'com.google.zxing:core:3.4.1'
+//    compile  'com.journeyapps:zxing-android-embedded:3.6.0'
 }
