@@ -19,8 +19,5 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-android {
-    compileSdkVersion 'Google Inc.:Glass Development Kit Preview:19'
-}
 dependencies {
 }
