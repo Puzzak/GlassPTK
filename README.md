@@ -3,6 +3,11 @@
 This is a port of my [PTK App](https://github.com/Puzzaks/PTK) for the Google Glass XE. It is not finished and probably won't be as developing for Glass is extremely hard and requires more knowledge than I ever had. With that out of the way, here's a short resume of this app.
 
 ---
+#### Setup
+I was not able to make it work through HTTPS for some reason on any of my Glass XE units. You are welcome to take a look and if you can, provide some help. That would be much appreciated. As of now, it only works with direct local IP over http, and doesn't work with URLs over HTTPS.
+To set it up to watch over your server, you have to change server address in `app\src\main\java\page\puzzak\ptk\glass\DownloadDataTask.java`, line `88` and in `app\src\main\java\page\puzzak\ptk\glass\LiveCardService.java`, line `36` before building and deploying.
+
+---
 
 ### Features
 
