@@ -18,6 +18,7 @@ This is a port of my [PTK App](https://github.com/Puzzaks/PTK) for the Google Gl
 
 #### Telemetry
 ![Telemetry card example](assets/GlassPTKScreenshot1.png)
+
 Using [AIO Script](https://github.com/Puzzak/AIO-Monitor) the server can report it's telemetry to any client that can utilize it's data. Data is encoded as a JSON object and is received using regular GET request. While you can update it at whatever interval you want, both PTK and Glass PTK are updating once per second. This is to ensure close to realtime interaction.
 Card contains:
 - Network Speed
@@ -37,7 +38,9 @@ As stated previously, Glass API allows this app to be integrated into the system
 For the launch trigger, you can use any text, it will be shown in the selector that is under the main (clock) card.
 ##### Voice Trigger
 ![Voice Trigger example](assets/GlassPTKScreenshot3.png)
+
 You can set up voice trigger in the file `app\src\main\res\xml\voice_trigger.xml`. You have to select one of existing commands, as Glass OS can only recognize select number of commands. You can find the full list [here](https://developers.google.com/glass/develop/gdk/reference/com/google/android/glass/app/VoiceTriggers.Command). I've used `SHOW_ME_A_DEMO` command here. You have to set it up in the `app\src\main\AndroidManifest.xml` in the default service.
 ##### Launch trigger
 ![Launch Trigger example](assets/GlassPTKScreenshot2.png)
+
 You can set up launch keyword in the file `app\src\main\res\xml\launch_trigger.xml`. It will be displayed in the list of launchable actions, alongside with system actions like "Record video" or "Show viewfinder". You have to set it up in the `app\src\main\AndroidManifest.xml` in the default service.
