@@ -85,7 +85,7 @@ public class DownloadDataTask extends AsyncTask<String, Void, String> {
             @Override
             public void run() {
 //                new DownloadDataTask(remoteViews, mLiveCard).execute("https://api.puzzak.page/AIO.php");
-                new DownloadDataTask(remoteViews, mLiveCard).execute("http://192.168.88.61/AIO.php");
+                new DownloadDataTask(remoteViews, mLiveCard).execute("https://puzzak.page/AIO.php");
             }
         }, UPDATE_INTERVAL);
     }

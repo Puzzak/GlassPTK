@@ -33,7 +33,7 @@ public class LiveCardService extends Service {
             mLiveCard.setViews(remoteViews);
 
             // Fetch data from the network and update the UI
-            String url = "http://192.168.88.61/AIO.php";
+            String url = "https://puzzak.page/AIO.php";
             downloadDataTask = new DownloadDataTask(remoteViews, mLiveCard);
             downloadDataTask.execute(url);
 
