@@ -1,4 +1,5 @@
 # Glass PTK
+![Header](assets/RepoSocial.png)
 
 This is a port of my [PTK App](https://github.com/Puzzaks/PTK) for the Google Glass XE. It is not finished and probably won't be as developing for Glass is extremely hard and requires more knowledge than I ever had. With that out of the way, here's a short resume of this app.
 
